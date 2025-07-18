@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Time Zones</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,33 +11,52 @@
         h1 {
             text-align: center;
         }
-        table {
-            margin: 0 auto;
-            border-collapse: collapse;
-            width: 300px;
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
         }
-        th, td {
-            border: 1px solid #333;
-            padding: 16px;
+        .clock {
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
             text-align: center;
+        }
+        .time {
+            font-size: 2em;
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome</h1>
-    <table>
-        <tr>
-            <td>1</td><td>2</td><td>3</td><td>4</td>
-        </tr>
-        <tr>
-            <td>5</td><td>6</td><td>7</td><td>8</td>
-        </tr>
-        <tr>
-            <td>9</td><td>10</td><td>11</td><td>12</td>
-        </tr>
-        <tr>
-            <td>13</td><td>14</td><td>15</td><td>16</td>
-        </tr>
-    </table>
+    <h1>Time Zones</h1>
+    <div class="clock-container">
+        <div class="clock">
+            <h2>Eastern Time</h2>
+            <div id="eastern" class="time"></div>
+        </div>
+        <div class="clock">
+            <h2>Central Time</h2>
+            <div id="central" class="time"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateClocks() {
+            const now = new Date();
+            
+            // Eastern Time
+            const easternTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+            document.getElementById('eastern').textContent = easternTime.toLocaleTimeString();
+            
+            // Central Time
+            const centralTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+            document.getElementById('central').textContent = centralTime.toLocaleTimeString();
+        }
+
+        // Update clocks every second
+        setInterval(updateClocks, 1000);
+        updateClocks(); // Initial update
+    </script>
 </body>
 </html>
